@@ -239,7 +239,7 @@ price_pipe = Pipeline(
     ]
 )
 
-model_name = 'regression_model_v1.pkl'
+model_name = 'lasso_regression_output_v0.1.0.pkl'
 def save_pipeline(price_pipe):
     path_model_name = trained_model_dir/model_name
     joblib.dump(price_pipe,path_model_name)
@@ -289,7 +289,7 @@ def load_pipeline(model_name):
 # from regression_model.config import config
 
 
-pipeline_file_name = 'regression_model_v1.pkl'
+pipeline_file_name = 'lasso_regression_output_v0.1.0.pkl'
 _price_pipe = load_pipeline(pipeline_file_name)
 
 
