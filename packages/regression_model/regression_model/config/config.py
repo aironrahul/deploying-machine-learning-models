@@ -423,30 +423,30 @@ class LogTransformer(BaseEstimator, TransformerMixin):
 _logger = logging.getLogger(__name__)
 
 
-price_pipe = Pipeline(
-    [
-        ('categorical_imputer',
-            CategoricalImputer(variables=CATEGORICAL_VARS_WITH_NA)),
-        ('numerical_inputer',
-            NumericalImputer(variables=NUMERICAL_VARS_WITH_NA)),
-        ('temporal_variable',
-            TemporalVariableEstimator(
-                variables=TEMPORAL_VARS,
-                reference_variable=DROP_FEATURES)),
-        ('rare_label_encoder',
-            RareLabelCategoricalEncoder(
-                tol=0.01,
-                variables=CATEGORICAL_VARS)),
-        ('categorical_encoder',
-            CategoricalEncoder(variables=CATEGORICAL_VARS)),
-        ('log_transformer',
-            LogTransformer(variables=NUMERICALS_LOG_VARS)),
-        ('drop_features',
-            DropUnecessaryFeatures(variables_to_drop=DROP_FEATURES)),
-        ('scaler', MinMaxScaler()),
-        ('Linear_model', Lasso(alpha=0.005, random_state=0))
-    ]
-)
+# price_pipe = Pipeline(
+#     [
+#         ('categorical_imputer',
+#             CategoricalImputer(variables=CATEGORICAL_VARS_WITH_NA)),
+#         ('numerical_inputer',
+#             NumericalImputer(variables=NUMERICAL_VARS_WITH_NA)),
+#         ('temporal_variable',
+#             TemporalVariableEstimator(
+#                 variables=TEMPORAL_VARS,
+#                 reference_variable=DROP_FEATURES)),
+#         ('rare_label_encoder',
+#             RareLabelCategoricalEncoder(
+#                 tol=0.01,
+#                 variables=CATEGORICAL_VARS)),
+#         ('categorical_encoder',
+#             CategoricalEncoder(variables=CATEGORICAL_VARS)),
+#         ('log_transformer',
+#             LogTransformer(variables=NUMERICALS_LOG_VARS)),
+#         ('drop_features',
+#             DropUnecessaryFeatures(variables_to_drop=DROP_FEATURES)),
+#         ('scaler', MinMaxScaler()),
+#         ('Linear_model', Lasso(alpha=0.005, random_state=0))
+#     ]
+# )
 
 
 
