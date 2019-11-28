@@ -12,6 +12,11 @@ import os
 from sklearn.externals import joblib
 from sklearn.pipeline import Pipeline
 
+#import logging
+from logging.handlers import TimedRotatingFileHandler
+#import os
+import sys
+
 #from regression_model.config import config
 #from regression_model import __version__ as _version
 
@@ -87,6 +92,28 @@ ACCEPTABLE_MODEL_DIFFERENCE = 0.05
 #from regression_model.config import logging_config
 
 
+#from regression_model.config import config
+
+# Multiple calls to logging.getLogger('someLogger') return a
+# reference to the same logger object.  This is true not only
+# within the same module, but also across modules as long as
+# it is in the same Python interpreter process.
+
+FORMATTER = logging.Formatter(
+    "%(asctime)s — %(name)s — %(levelname)s —"
+    "%(funcName)s:%(lineno)d — %(message)s")
+
+
+def get_console_handler():
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(FORMATTER)
+    return console_handler
+
+
+
+
+
+
 # Configure logger for use in package
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -96,8 +123,6 @@ logger.propagate = False
 
 with open(os.path.join(PACKAGE_ROOT, 'VERSION')) as version_file:
     __version__ = version_file.read().strip()
-
-
 
 
 _logger = logging.getLogger(__name__)
