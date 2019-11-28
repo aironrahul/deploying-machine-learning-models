@@ -2,12 +2,12 @@ import math
 
 from regression_model.predict import make_prediction
 from regression_model import config
-from regression_model.config import load_dataset
+#from regression_model.config import load_dataset
 
 
 def test_make_single_prediction():
     # Given
-    test_data = load_dataset(file_name='test.csv')
+    test_data = config.load_dataset(file_name='test.csv')
     single_test_json = test_data[0:1]
 
     # When
@@ -21,7 +21,7 @@ def test_make_single_prediction():
 
 def test_make_multiple_predictions():
     # Given
-    test_data = load_dataset(file_name='test.csv')
+    test_data = config.load_dataset(file_name='test.csv')
     original_data_length = len(test_data)
     multiple_test_json = test_data
 
