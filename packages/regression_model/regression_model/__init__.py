@@ -8,7 +8,7 @@ from regression_model import config
 # Configure logger for use in package
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-logger.addHandler(config.logging_config.get_console_handler())
+logger.addHandler(config.get_console_handler())
 logger.propagate = False
 
 
