@@ -2,6 +2,7 @@ import os
 import pathlib
 
 import regression_model
+from regression_model import __version__ as _version
 
 import pandas as pd
 
