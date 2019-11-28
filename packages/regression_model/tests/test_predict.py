@@ -1,6 +1,6 @@
 import math
 
-from regression_model.predict import make_prediction
+#from regression_model.predict import make_prediction
 from regression_model import config
 #from regression_model.config import load_dataset
 
@@ -11,7 +11,7 @@ def test_make_single_prediction():
     single_test_json = test_data[0:1]
 
     # When
-    subject = make_prediction(input_data=single_test_json)
+    subject = config.make_prediction(input_data=single_test_json)
 
     # Then
     assert subject is not None
@@ -26,7 +26,7 @@ def test_make_multiple_predictions():
     multiple_test_json = test_data
 
     # When
-    subject = make_prediction(input_data=multiple_test_json)
+    subject = config.make_prediction(input_data=multiple_test_json)
 
     # Then
     assert subject is not None
