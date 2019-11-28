@@ -26,6 +26,16 @@ from regression_model.processing.errors import InvalidModelInputError
 from sklearn.linear_model import Lasso
 #from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
+#import numpy as np
+#import pandas as pd
+
+#from regression_model.processing.data_management import load_pipeline
+#from regression_model.config import config
+from regression_model.processing.validation import validate_inputs
+#from regression_model import __version__ as _version
+
+import logging
+
 
 #from regression_model.processing import preprocessors as pp
 #from regression_model.processing import features
@@ -171,7 +181,7 @@ def save_pipeline(*, pipeline_to_persist) -> None:
     """
 
     # Prepare versioned save file name
-    save_file_name = f'{PIPELINE_SAVE_FILE}{_version}.pkl'
+    save_file_name = f'{PIPELINE_SAVE_FILE}{__version__}.pkl'
     save_path = TRAINED_MODEL_DIR / save_file_name
 
     remove_old_pipelines(files_to_keep=save_file_name)
@@ -427,3 +437,28 @@ price_pipe = Pipeline(
         ('Linear_model', Lasso(alpha=0.005, random_state=0))
     ]
 )
+
+
+
+_logger = logging.getLogger(__name__)
+
+pipeline_file_name = f'{PIPELINE_SAVE_FILE}{__version__}.pkl'
+_price_pipe = load_pipeline(file_name=pipeline_file_name)
+
+
+def make_prediction(*, input_data) -> dict:
+    """Make a prediction using the saved model pipeline."""
+
+    data = pd.DataFrame(input_data)
+    validated_data = validate_inputs(input_data=data)
+    prediction = _price_pipe.predict(validated_data[FEATURES])
+    output = np.exp(prediction)
+
+    results = {'predictions': output, 'version': __version__}
+
+    _logger.info(
+        f'Making predictions with model version: {__version__} '
+        f'Inputs: {validated_data} '
+        f'Predictions: {results}')
+
+    return results
