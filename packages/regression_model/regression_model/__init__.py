@@ -1,7 +1,7 @@
 import logging
 import os
 
-from regression_model import config
+from regression_model.config import config
 #from regression_model.config import logging_config
 
 
