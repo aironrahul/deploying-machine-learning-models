@@ -1,4 +1,4 @@
-# production requirements
+# production requirement
 numpy==1.15.4
 scikit-learn==0.20.2
 pandas==0.23.4
